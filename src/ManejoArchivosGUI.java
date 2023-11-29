@@ -39,6 +39,15 @@ public class ManejoArchivosGUI extends JFrame {
 
             }
         });
+        btnREADUSERS.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                dispose();
+                READ_USERS form=new READ_USERS();
+                form.setVisible(true);
+            }
+        });
     }
 
 }
