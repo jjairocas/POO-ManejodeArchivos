@@ -8,11 +8,13 @@ public class ManejoArchivosGUI extends JFrame {
     private JButton btnREADUSERS;
     private JButton btnUPDATEUSERS;
     private JPanel MainPanel;
+    private JButton DELETEFRIENDSButton;
+    private JButton EXITButton;
 
     public ManejoArchivosGUI() {
         setContentPane(MainPanel);
         setTitle("MENU MANAGEMENT");     //Titulo Ventana
-        setSize(400, 150);      //Tamaño ventana
+        setSize(420, 150);      //Tamaño ventana
         setLocationRelativeTo(null);        //La ventana se posiciona en el centro
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);    //El boton cerrar cierra la ventana
         setResizable(false);                //La ventana no se puede cambiar de tamaño
@@ -55,6 +57,22 @@ public class ManejoArchivosGUI extends JFrame {
                 dispose();
                 UPDATE_USERS form=new UPDATE_USERS();
                 form.setVisible(true);
+            }
+        });
+        DELETEFRIENDSButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                dispose();
+                DELETE_USERS form=new DELETE_USERS();
+                form.setVisible(true);
+            }
+        });
+        EXITButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+
             }
         });
     }

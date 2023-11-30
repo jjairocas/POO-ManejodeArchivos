@@ -5,25 +5,24 @@ import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 
-public class UPDATE_USERS extends JFrame{
-    private JTextField txtPHONE;
-    private JButton btnSEARCH;
-    private JButton btnUPDATE;
-    private JButton btnCLEAR;
-    private JButton btnBACKTOMENU;
-    private JPanel MainPanel;
+public class DELETE_USERS extends JFrame{
     private JTextField txtNAME;
-    private JTextField txtNEWPHONE;
+    private JButton DELETEButton;
+    private JButton BACKTOMENUButton;
+    private JPanel MainPanel;
+    private JButton CLEARButton;
 
-    public UPDATE_USERS() {
+    public DELETE_USERS() {
         setContentPane(MainPanel);
-        setTitle("UPDATE FRIENDS");     //Titulo Ventana
-        setSize(350, 200);      //Tamaño ventana
+        setTitle("DELETE FRIENDS");     //Titulo Ventana
+        setSize(370, 150);      //Tamaño ventana
         setLocationRelativeTo(null);        //La ventana se posiciona en el centro
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);    //El boton cerrar cierra la ventana
         setResizable(false);                //La ventana no se puede cambiar de tamaño
         //setVisible(true); Se visualiza la ventana en la parte superior izquierda
-        btnSEARCH.addActionListener(new ActionListener() {
+
+
+        DELETEButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
@@ -33,10 +32,6 @@ public class UPDATE_USERS extends JFrame{
                     // from the Command line argument
                     String newName = txtNAME.getText();
 
-                    // Get the number to be updated
-                    // from the Command line argument
-                    long newNumber = Long.parseLong(txtPHONE.getText());
-
                     String nameNumberString;
                     String name;
                     long number;
@@ -56,8 +51,7 @@ public class UPDATE_USERS extends JFrame{
                             = new RandomAccessFile(file, "rw");
                     boolean found = false;
 
-                    // Checking whether the name
-                    // of contact already exists.
+                    // Checking whether the name of contact exists.
                     // getFilePointer() give the current offset
                     // value from start of the file.
                     while (raf.getFilePointer() < raf.length()) {
@@ -75,119 +69,15 @@ public class UPDATE_USERS extends JFrame{
                         number = Long.parseLong(lineSplit[1]);
 
                         // if condition to find existence of record.
-                        if (name.equals(newName)
-                                && number == newNumber) {
+                        if (name.equals(newName)){
                             found = true;
                             break;
                         }
                     }
 
+                    // Delete the contact if record exists.
                     if (found == true) {
 
-                        JOptionPane.showMessageDialog(null, " THE FRIEND EXISTS! ",
-                                "CONFIRMATION",
-                                JOptionPane.INFORMATION_MESSAGE);
-                        System.out.println("The friend exists");
-
-                    }
-
-                    // The contact to be updated
-                    // could not be found
-                    else {
-
-                        // Closing the resources.
-                        raf.close();
-
-                        JOptionPane.showMessageDialog(null, " THE FRIEND DOES NOT EXIST ",
-                                "CONFIRMATION",
-                                JOptionPane.ERROR_MESSAGE);
-
-                        txtNAME.setText("");
-                        txtPHONE.setText("");
-                        txtNEWPHONE.setText("");
-
-                        // Print the message
-                        System.out.println(" Input name"
-                                + " does not exists. ");
-                    }
-                }
-
-                catch (IOException ioe) {
-                    System.out.println(ioe);
-                }
-
-                catch (NumberFormatException nef) {
-                    JOptionPane.showMessageDialog(null, " FOR INPUT DATA ",
-                            "CONFIRMATION",
-                            JOptionPane.ERROR_MESSAGE);
-
-                    System.out.println(nef);
-                }
-
-            }
-        });
-        btnUPDATE.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-                try {
-
-                    // Get the name of the contact to be updated
-                    // from the Command line argument
-                    String newName = txtNAME.getText();;
-
-                    // Get the number to be updated
-                    // from the Command line argument
-                    long newNumber = Long.parseLong(txtPHONE.getText());;
-
-                    String nameNumberString;
-                    String name;
-                    long number;
-                    int index;
-
-                    // Using file pointer creating the file.
-                    File file = new File("C:\\Users\\JAIRO\\IdeaProjects\\POO-Ejercicios Trabajo6\\friendsContact.txt");
-
-                    if (!file.exists()) {
-
-                        // Create a new file if not exists.
-                        file.createNewFile();
-                    }
-
-                    // Opening file in reading and write mode.
-                    RandomAccessFile raf
-                            = new RandomAccessFile(file, "rw");
-                    boolean found = false;
-
-                    // Checking whether the name
-                    // of contact already exists.
-                    // getFilePointer() give the current offset
-                    // value from start of the file.
-                    while (raf.getFilePointer() < raf.length()) {
-
-                        // reading line from the file.
-                        nameNumberString = raf.readLine();
-
-                        // splitting the string to get name and
-                        // number
-                        String[] lineSplit
-                                = nameNumberString.split("!");
-
-                        // separating name and number.
-                        name = lineSplit[0];
-                        number = Long.parseLong(lineSplit[1]);
-
-                        // if condition to find existence of record.
-                        if (name.equals(newName)
-                                && number == newNumber) {
-                            found = true;
-                            break;
-                        }
-                    }
-
-                    // Update the contact if record exists.
-                    if (found == true) {
-                        System.out.println("The friend exists");
                         // Creating a temporary file
                         // with file pointer as tmpFile.
                         File tmpFile = new File("C:\\Users\\JAIRO\\IdeaProjects\\POO-Ejercicios Trabajo6\\temp.txt");
@@ -212,14 +102,12 @@ public class UPDATE_USERS extends JFrame{
                                     0, index);
 
                             // Check if the fetched contact
-                            // is the one to be updated
+                            // is the one to be deleted
                             if (name.equals(newName)) {
-                                long UpdateNumber=Long.parseLong(txtNEWPHONE.getText());
 
-                                // Update the number of this contact
-                                nameNumberString
-                                        = name + "!"
-                                        + String.valueOf(UpdateNumber);
+                                // Skip inserting this contact
+                                // into the temporary file
+                                continue;
                             }
 
                             // Add this contact in the temporary
@@ -232,7 +120,7 @@ public class UPDATE_USERS extends JFrame{
                                     System.lineSeparator());
                         }
 
-                        // The contact has been updated now
+                        // The contact has been deleted now
                         // So copy the updated content from
                         // the temporary file to original file.
 
@@ -259,13 +147,14 @@ public class UPDATE_USERS extends JFrame{
                         // Deleting the temporary file
                         tmpFile.delete();
 
-                        JOptionPane.showMessageDialog(null, " FRIEND UPDATED ",
+                        JOptionPane.showMessageDialog(null, " FRIEND DELETED ",
                                 "CONFIRMATION",
                                 JOptionPane.INFORMATION_MESSAGE);
-                        System.out.println(" Friend updated. ");
+
+                        System.out.println(" Friend deleted. ");
                     }
 
-                    // The contact to be updated
+                    // The contact to be deleted
                     // could not be found
                     else {
 
@@ -278,8 +167,6 @@ public class UPDATE_USERS extends JFrame{
                                 JOptionPane.ERROR_MESSAGE);
 
                         txtNAME.setText("");
-                        txtPHONE.setText("");
-                        txtNEWPHONE.setText("");
 
                         System.out.println(" Input name"
                                 + " does not exists. ");
@@ -289,7 +176,6 @@ public class UPDATE_USERS extends JFrame{
                 catch (IOException ioe) {
                     System.out.println(ioe);
                 }
-
                 catch (NumberFormatException nef) {
                     JOptionPane.showMessageDialog(null, " FOR INPUT DATA ",
                             "CONFIRMATION",
@@ -298,20 +184,18 @@ public class UPDATE_USERS extends JFrame{
                     System.out.println(nef);
                 }
 
-
             }
         });
-        btnCLEAR.addActionListener(new ActionListener() {
+
+        CLEARButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
                 txtNAME.setText("");
-                txtPHONE.setText("");
-                txtNEWPHONE.setText("");
 
             }
         });
-        btnBACKTOMENU.addActionListener(new ActionListener() {
+        BACKTOMENUButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
@@ -322,4 +206,7 @@ public class UPDATE_USERS extends JFrame{
             }
         });
     }
+
 }
+
+

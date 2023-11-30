@@ -48,6 +48,22 @@
           <text value="UPDATE FRIENDS"/>
         </properties>
       </component>
+      <component id="887c2" class="javax.swing.JButton" binding="DELETEFRIENDSButton" default-binding="true">
+        <constraints>
+          <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="1" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="DELETE FRIENDS"/>
+        </properties>
+      </component>
+      <component id="fe68b" class="javax.swing.JButton" binding="EXITButton" default-binding="true">
+        <constraints>
+          <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="1" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="            EXIT            "/>
+        </properties>
+      </component>
     </children>
   </grid>
 </form>
