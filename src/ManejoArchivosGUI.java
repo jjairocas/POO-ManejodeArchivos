@@ -48,6 +48,15 @@ public class ManejoArchivosGUI extends JFrame {
                 form.setVisible(true);
             }
         });
+        btnUPDATEUSERS.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                dispose();
+                UPDATE_USERS form=new UPDATE_USERS();
+                form.setVisible(true);
+            }
+        });
     }
 
 }

@@ -15,7 +15,7 @@ public class READ_USERS extends JFrame {
 
     public READ_USERS() {
         setContentPane(MainPanel);
-        setTitle("READ USERS");     //Titulo Ventana
+        setTitle("READ FRIENDS");     //Titulo Ventana
         setSize(450, 350);      //Tamaño ventana
         setLocationRelativeTo(null);        //La ventana se posiciona en el centro
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);    //El boton cerrar cierra la ventana

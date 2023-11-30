@@ -8,14 +8,14 @@ import java.io.RandomAccessFile;
 public class CREATE_ADDUSERS extends JFrame {
     private JTextField txtNAME;
     private JTextField txtPHONE;
-    private JButton ADDUSERButton;
-    private JButton CLEARButton;
-    private JButton BACKTOMENUButton;
+    private JButton btnADDUSER;
+    private JButton btnCLEAR;
+    private JButton btnBACKTOMENU;
     private JPanel MainPanel;
 
     public CREATE_ADDUSERS() {
         setContentPane(MainPanel);
-        setTitle("ADD USERS");     //Titulo Ventana
+        setTitle("ADD FRIENDS");     //Titulo Ventana
         setSize(400, 150);      //Tamaño ventana
         setLocationRelativeTo(null);        //La ventana se posiciona en el centro
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);    //El boton cerrar cierra la ventana
@@ -23,7 +23,7 @@ public class CREATE_ADDUSERS extends JFrame {
         //setVisible(true); Se visualiza la ventana en la parte superior izquierda
 
 
-        ADDUSERButton.addActionListener(new ActionListener() {
+        btnADDUSER.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
@@ -78,7 +78,7 @@ public class CREATE_ADDUSERS extends JFrame {
                         number = Long.parseLong(lineSplit[1]);
 
                         // if condition to find existence of record.
-                        if (name == newName
+                        if (name.equals(newName)
                                 || number == newNumber) {
                             found = true;
                             break;
@@ -101,8 +101,8 @@ public class CREATE_ADDUSERS extends JFrame {
                         raf.writeBytes(System.lineSeparator());
 
                         // Print the message
-                        JOptionPane.showMessageDialog(null, "FRIEND ADDED ",
-                                         "USER CONFIRMATION",
+                        JOptionPane.showMessageDialog(null, " THE FRIEND "+newName+" ADDED ",
+                                         "CONFIRMATION",
                                 JOptionPane.INFORMATION_MESSAGE);
                         System.out.println(" Friend added. ");
 
@@ -118,7 +118,7 @@ public class CREATE_ADDUSERS extends JFrame {
 
                         // Print the message
                         JOptionPane.showMessageDialog(null, "FRIEND ALREADY EXISTS ",
-                                "USER CONFIRMATION",
+                                "CONFIRMATION",
                                 JOptionPane.ERROR_MESSAGE);
 
                         System.out.println(" Input name"
@@ -131,6 +131,9 @@ public class CREATE_ADDUSERS extends JFrame {
                     System.out.println(ioe);
                 }
                 catch (NumberFormatException nef) {
+                    JOptionPane.showMessageDialog(null, " FOR INPUT DATA ",
+                            "CONFIRMATION",
+                            JOptionPane.ERROR_MESSAGE);
 
                     System.out.println(nef);
                 }
@@ -138,7 +141,7 @@ public class CREATE_ADDUSERS extends JFrame {
 
             }
         });
-        CLEARButton.addActionListener(new ActionListener() {
+        btnCLEAR.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
@@ -147,7 +150,7 @@ public class CREATE_ADDUSERS extends JFrame {
 
             }
         });
-        BACKTOMENUButton.addActionListener(new ActionListener() {
+        btnBACKTOMENU.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
